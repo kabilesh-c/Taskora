@@ -205,15 +205,16 @@ const TargetCursor = ({
       gsap.set(cursorRef.current, { rotation: 0 });
 
       const rect = target.getBoundingClientRect();
+      const padding = 8; // Extra padding around the target for a cleaner 'lock-on' feel
       const { borderWidth, cornerSize } = constants;
       const cursorX = gsap.getProperty(cursorRef.current, 'x') as number;
       const cursorY = gsap.getProperty(cursorRef.current, 'y') as number;
 
       targetCornerPositionsRef.current = [
-        { x: rect.left - borderWidth, y: rect.top - borderWidth },
-        { x: rect.right + borderWidth - cornerSize, y: rect.top - borderWidth },
-        { x: rect.right + borderWidth - cornerSize, y: rect.bottom + borderWidth - cornerSize },
-        { x: rect.left - borderWidth, y: rect.bottom + borderWidth - cornerSize }
+        { x: rect.left - padding - borderWidth, y: rect.top - padding - borderWidth },
+        { x: rect.right + padding + borderWidth - cornerSize, y: rect.top - padding - borderWidth },
+        { x: rect.right + padding + borderWidth - cornerSize, y: rect.bottom + padding + borderWidth - cornerSize },
+        { x: rect.left - padding - borderWidth, y: rect.bottom + padding + borderWidth - cornerSize }
       ];
 
       isActiveRef.current = true;
