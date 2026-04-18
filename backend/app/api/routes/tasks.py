@@ -1,6 +1,7 @@
 """Task CRUD routes — all require JWT authentication."""
 
 import uuid
+from datetime import date, timedelta
 from typing import Optional
 
 from fastapi import APIRouter, Depends, Query, status
@@ -9,16 +10,48 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.deps import get_current_user
 from app.db.database import get_db
 from app.db.models import User
-from app.schemas.task import TaskCreate, TaskListResponse, TaskOut, TaskUpdate
+from app.schemas.task import TaskCreate, TaskListResponse, TaskOut, TaskStatsOut, TaskUpdate
 from app.services.task_service import (
     create_task,
     delete_task,
+    get_calendar_tasks,
     get_task,
+    get_task_stats,
     get_tasks,
     update_task,
 )
 
 router = APIRouter(prefix="/tasks", tags=["Tasks"])
+
+
+@router.get(
+    "/stats",
+    response_model=TaskStatsOut,
+    summary="Get aggregate task statistics",
+)
+async def get_stats_route(
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> TaskStatsOut:
+    """Return aggregate stats for the authenticated user."""
+    return await get_task_stats(db, current_user.id)
+
+
+@router.get(
+    "/calendar",
+    response_model=dict,
+    summary="Get tasks grouped by date for a week",
+)
+async def get_calendar_route(
+    week_start: Optional[date] = Query(None, description="Start of week (YYYY-MM-DD). Defaults to current Monday."),
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> dict:
+    """Return tasks grouped by due_date for the given 7-day window."""
+    if week_start is None:
+        today = date.today()
+        week_start = today - timedelta(days=today.weekday())  # This Monday
+    return await get_calendar_tasks(db, current_user.id, week_start)
 
 
 @router.post(
