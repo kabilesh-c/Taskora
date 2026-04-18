@@ -2,11 +2,11 @@ import Image from 'next/image';
 
 export function FeatureCardsGrid() {
   return (
-    <section className="px-6 lg:px-8 max-w-[1280px] mx-auto mb-24 cursor-target">
+    <section className="px-6 lg:px-8 max-w-[1280px] mx-auto mb-24">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         
         {/* Card 1: Orange Rating */}
-        <div className="bg-bordup-orange rounded-[32px] p-8 flex flex-col justify-between overflow-hidden relative min-h-[320px] group cursor-target">
+        <div className="bg-bordup-orange rounded-[32px] p-8 flex flex-col justify-between overflow-hidden relative min-h-[320px] group">
           <h3 className="text-white text-2xl font-bold mb-8 z-10 group-hover:scale-105 transition-transform origin-left">Average Rating</h3>
           
           <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-5 w-full z-10 shadow-soft border border-white/30 group-hover:bg-white/30 transition-colors">
@@ -34,7 +34,7 @@ export function FeatureCardsGrid() {
         </div>
 
         {/* Card 2: Premium Image Card */}
-        <div className="bg-bordup-purple rounded-[32px] p-8 relative min-h-[320px] overflow-hidden group cursor-target border border-purple-100">
+        <div className="bg-bordup-purple rounded-[32px] p-8 relative min-h-[320px] overflow-hidden group border border-purple-100">
           <div className="relative z-20">
             <h3 className="text-bordup-dark text-4xl font-bold mb-2 tracking-tight group-hover:text-purple-900 transition-colors">Go Premium</h3>
             <p className="text-bordup-dark text-xs font-semibold w-[60%] mb-6">Explore our product and join a premium user</p>
@@ -52,7 +52,7 @@ export function FeatureCardsGrid() {
         </div>
 
         {/* Card 3: White Counter */}
-        <div className="bg-white rounded-[32px] p-8 flex flex-col items-center justify-center relative min-h-[320px] border border-gray-100 shadow-sm group cursor-target">
+        <div className="bg-white rounded-[32px] p-8 flex flex-col items-center justify-center relative min-h-[320px] border border-gray-100 shadow-sm group">
           <div className="bg-white shadow-soft rounded-[24px] p-5 w-full max-w-[200px] border border-gray-50 flex flex-col items-center mb-8 relative top-[-10px] group-hover:-translate-y-2 transition-transform duration-500">
              <h4 className="text-4xl font-black text-bordup-dark mb-3">120K+</h4>
              <div className="flex -space-x-2 mb-3">

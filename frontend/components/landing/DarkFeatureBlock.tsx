@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export function DarkFeatureBlock() {
   return (
-    <section className="px-6 lg:px-8 mb-16 max-w-[1280px] mx-auto cursor-target">
+    <section className="px-6 lg:px-8 mb-16 max-w-[1280px] mx-auto">
       <div className="w-full bg-bordup-dark rounded-[32px] p-8 md:p-12 lg:p-16 flex flex-col md:flex-row items-center justify-between gap-12 relative overflow-hidden group">
         
         {/* Background diagonal dark stripes matching reference image */}

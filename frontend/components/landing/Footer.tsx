@@ -15,9 +15,9 @@ export function Footer() {
             <input 
               type="email" 
               placeholder="Enter your email" 
-              className="w-full md:w-[350px] h-[60px] pl-6 pr-32 rounded-full border-none focus:outline-none text-bordup-dark"
+              className="w-full md:w-[350px] h-[60px] pl-6 pr-32 rounded-full border-none focus:outline-none text-bordup-dark cursor-target"
             />
-            <button className="absolute right-2 top-2 h-[44px] px-5 bg-bordup-dark text-white rounded-full text-sm font-semibold flex items-center justify-center transition-transform hover:bg-[#111]">
+            <button className="absolute right-2 top-2 h-[44px] px-5 bg-bordup-dark text-white rounded-full text-sm font-semibold flex items-center justify-center transition-transform hover:bg-[#111] cursor-target">
               Try Free
               <div className="ml-2 w-6 h-6 bg-white rounded-full flex items-center justify-center">
                 <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
