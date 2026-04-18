@@ -11,7 +11,8 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 10080  # 7 days
     ALLOWED_ORIGINS: str = "*"
-    GEMINI_API_KEY: str = ""  # Phase 2
+    GEMINI_API_KEY: str = ""
+    ADMIN_SECRET: str = ""
 
     class Config:
         env_file = ".env"
