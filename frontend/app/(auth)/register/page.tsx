@@ -1,54 +1,108 @@
+'use client';
+
+import { useRef } from 'react';
+import Link from 'next/link';
 import { RegisterForm } from '@/components/auth/RegisterForm';
+import SpotlightCard from '@/components/ui/SpotlightCard';
+import VariableProximity from '@/components/ui/VariableProximity';
+import { motion } from 'framer-motion';
 
 export default function RegisterPage() {
+  const containerRef = useRef(null);
+
   return (
-    <div className="flex min-h-screen bg-background">
-      {/* Left Decorative Panel */}
-      <div className="hidden lg:flex lg:w-1/2 relative bg-dark-bg overflow-hidden items-center justify-center p-12">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/40 z-0"></div>
-        <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-indigo-900/40 via-transparent to-transparent"></div>
+    <div className="min-h-screen bg-[#F9F6F0] font-sans selection:bg-purple-200 selection:text-purple-900 overflow-x-hidden relative flex flex-col md:flex-row">
+      
+      {/* Decorative Left Side (Desktop) */}
+      <div className="hidden lg:flex lg:w-1/2 relative bg-[#161616] overflow-hidden items-center justify-center p-12">
+        {/* Subtle Background Glow */}
+        <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-emerald-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none"></div>
         
         <div className="relative z-10 w-full max-w-lg">
-          <div className="text-white mb-10 text-center">
-            <h2 className="text-4xl font-bold mb-4 font-sans tracking-tight">Join 2,400+ Agencies</h2>
-            <p className="text-gray-300 text-lg text-balance">The only tool built specifically for the chaos of digital marketing workflows.</p>
-          </div>
-          
-          {/* Testimonial mock */}
-          <div className="mt-12 bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm animate-float-slow">
-            <div className="flex items-center gap-1 mb-4 text-amber-400">
-              {'★★★★★'.split('').map((star, i) => <span key={i}>{star}</span>)}
-            </div>
-            <p className="text-white/90 text-lg mb-4 leading-relaxed">
-              &quot;TaskFlow transformed our team&apos;s output. We spend less time tracking who is doing what, and more time actually delivering for clients.&quot;
+          <div ref={containerRef} className="mb-12">
+            <h2 className="text-5xl md:text-6xl font-bold text-white leading-[1.1] tracking-tight mb-8">
+              <VariableProximity
+                label="Craft your legacy with Taskora."
+                className="text-white cursor-target"
+                fromFontVariationSettings="'wght' 400, 'opsz' 14"
+                toFontVariationSettings="'wght' 900, 'opsz' 84"
+                containerRef={containerRef}
+                radius={120}
+                falloff="linear"
+              />
+            </h2>
+            <p className="text-gray-400 text-lg max-w-[400px] leading-relaxed">
+              Join thousands of professionals scaling their impact with our specialized digital workflow engine.
             </p>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center font-bold text-white">AM</div>
+          </div>
+
+          {/* Testimonial Element */}
+          <motion.div 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[32px] p-8 shadow-2xl relative"
+          >
+            <div className="flex items-center gap-1 mb-4 text-emerald-400">
+              {'★★★★★'.split('').map((star, i) => <span key={i} className="text-xl">★</span>)}
+            </div>
+            <p className="text-white text-lg mb-6 leading-relaxed italic font-medium">
+              &quot;The most fluid interface I&apos;ve ever used for agency management. Truly game-changing.&quot;
+            </p>
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-emerald-500 to-blue-500 p-0.5">
+                <div className="w-full h-full rounded-full bg-[#161616] flex items-center justify-center text-white font-black text-xs tracking-tighter">
+                   AK
+                </div>
+              </div>
               <div>
-                <h5 className="text-white font-medium">Arjun M.</h5>
-                <p className="text-gray-400 text-sm">Digital Strategist, Weboin</p>
+                 <div className="text-sm text-white font-bold">Arjun Kalish</div>
+                 <div className="text-xs text-gray-500">Director at Weboin Labs</div>
               </div>
             </div>
-          </div>
+          </motion.div>
+        </div>
+
+        {/* Logo at bottom left */}
+        <div className="absolute bottom-10 left-10 flex items-center gap-2">
+           <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center">
+              <div className="w-3 h-3 rounded-full border-[2.5px] border-[#161616] relative top-[-1px]"></div>
+           </div>
+           <span className="font-bold text-xl text-white tracking-tight">Taskora</span>
         </div>
       </div>
 
-      {/* Right Form Panel */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 lg:p-16">
-        <div className="w-full max-w-md mx-auto">
-          {/* Mobile Logo */}
-          <div className="lg:hidden mb-8 text-center flex items-center justify-center">
-            <div className="w-8 h-8 rounded-lg bg-primary mr-2 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 text-white">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-              </svg>
-            </div>
-            <span className="text-xl font-bold tracking-tight text-text-primary">TaskFlow</span>
-          </div>
+      {/* Main Form Side */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 lg:p-16 relative">
+        <div className="w-full max-w-[480px]">
           
-          <RegisterForm />
+          {/* Mobile Logo Only */}
+          <div className="lg:hidden flex justify-center mb-12">
+            <div className="flex items-center gap-2">
+               <div className="w-10 h-10 rounded-full bg-[#161616] flex items-center justify-center">
+                  <div className="w-3 h-3 rounded-full border-[2.5px] border-white relative top-[-1px]"></div>
+               </div>
+               <span className="font-bold text-2xl text-[#161616] tracking-tight">Taskora</span>
+            </div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <SpotlightCard className="bg-white border-gray-100 shadow-xl overflow-visible" spotlightColor="rgba(0,0,0,0.03)">
+               <RegisterForm />
+            </SpotlightCard>
+          </motion.div>
+
+          <p className="mt-8 text-center text-gray-500 text-sm font-medium">
+            Already a member? <Link href="/login" className="text-[#161616] font-bold hover:underline">Log in</Link>
+          </p>
         </div>
       </div>
+
     </div>
   );
 }

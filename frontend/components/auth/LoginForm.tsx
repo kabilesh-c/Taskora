@@ -28,10 +28,6 @@ export function LoginForm() {
       const response = await api.post('/login', { email, password });
       const { access_token } = response.data;
       
-      // Store token early so we can fetch user details if needed, 
-      // but here we just need to decode it or fetch profile.
-      // Since our API login doesn't return user details in this scope, 
-      // we'll store a mock user derived from token/email for demo purposes.
       login(access_token, {
         id: '1', 
         email, 
@@ -39,8 +35,6 @@ export function LoginForm() {
         created_at: new Date().toISOString()
       });
       
-      // router push is handled by useAuth or layout if needed, 
-      // but we do it explicitly here for safety
       window.location.href = '/dashboard';
     } catch (error: any) {
       setToast({ 
@@ -52,35 +46,58 @@ export function LoginForm() {
     }
   };
 
-  const handleDemoLogin = () => {
-    setEmail(process.env.NEXT_PUBLIC_DEMO_EMAIL || 'demo@weboin.com');
-    setPassword(process.env.NEXT_PUBLIC_DEMO_PASSWORD || 'demo1234');
-    // Using setTimeout to allow state to update before submitting
-    setTimeout(() => {
-      document.getElementById('login-submit')?.click();
-    }, 100);
+  const handleDemoLogin = async () => {
+    const demoEmail = process.env.NEXT_PUBLIC_DEMO_EMAIL || 'demo@weboin.com';
+    const demoPassword = process.env.NEXT_PUBLIC_DEMO_PASSWORD || 'demo1234';
+    
+    setEmail(demoEmail);
+    setPassword(demoPassword);
+    
+    // Trigger login logic directly
+    setIsLoading(true);
+    try {
+      const response = await api.post('/login', { email: demoEmail, password: demoPassword });
+      const { access_token } = response.data;
+      
+      login(access_token, {
+        id: '1', 
+        email: demoEmail, 
+        full_name: 'Demo User', 
+        created_at: new Date().toISOString()
+      });
+      
+      window.location.href = '/dashboard';
+    } catch (error: any) {
+      setToast({ 
+        message: error.response?.data?.detail || 'Demo login failed', 
+        type: 'error' 
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="w-full max-w-md mx-auto">
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
       
-      <div className="mb-8 text-center sm:text-left">
-        <h1 className="text-3xl font-bold tracking-tight text-text-primary mb-2">Welcome back</h1>
-        <p className="text-text-secondary">Enter your details to access your account.</p>
+      <div className="mb-10">
+        <h1 className="text-4xl font-extrabold tracking-tight text-[#161616] mb-3">Welcome back</h1>
+        <p className="text-gray-500 font-medium">Continue your high-performance journey.</p>
       </div>
 
-      <form onSubmit={handleLogin} className="space-y-5">
+      <form onSubmit={handleLogin} className="space-y-6">
         <Input
           label="Email address"
           type="email"
-          placeholder="name@agency.com"
+          placeholder="name@company.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          className="border-gray-200 focus-visible:ring-[#161616]/10 rounded-2xl h-[56px]"
         />
         
-        <div className="space-y-1">
+        <div className="space-y-2">
           <Input
             label="Password"
             type="password"
@@ -88,45 +105,37 @@ export function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            className="border-gray-200 focus-visible:ring-[#161616]/10 rounded-2xl h-[56px]"
           />
-          <div className="flex justify-between items-center text-sm px-1">
-            <label className="flex items-center space-x-2 cursor-pointer">
-              <input type="checkbox" className="rounded text-primary focus:ring-primary h-4 w-4 border-gray-300" />
-              <span className="text-text-secondary">Remember me</span>
+          <div className="flex justify-between items-center text-xs px-1 font-bold">
+            <label className="flex items-center space-x-2 cursor-pointer group">
+              <input type="checkbox" className="rounded text-[#161616] focus:ring-[#161616] h-4 w-4 border-gray-300" />
+              <span className="text-gray-400 group-hover:text-gray-600 transition-colors">Keep me active</span>
             </label>
-            <a href="#" className="font-medium text-primary hover:text-secondary">Forgot password?</a>
+            <a href="#" className="text-gray-400 hover:text-[#161616] transition-colors">Forgot key?</a>
           </div>
         </div>
 
         <Button 
           id="login-submit"
           type="submit" 
-          className="w-full mt-6" 
+          className="w-full h-[60px] bg-[#161616] hover:bg-black text-white rounded-full font-bold text-base shadow-xl transition-all hover:scale-[1.02] active:scale-95 mt-4" 
           isLoading={isLoading}
         >
-          Sign In
+          Access Account
         </Button>
       </form>
 
-      <div className="mt-8 pt-8 border-t border-gray-100 flex flex-col gap-4">
-        <div className="w-full bg-indigo-50 rounded-2xl p-4 border border-indigo-100 flex flex-col items-center text-center">
-          <p className="text-sm text-indigo-900 mb-3 font-medium">Just looking around?</p>
-          <Button 
-            variant="secondary" 
-            onClick={handleDemoLogin} 
-            className="w-full"
-          >
-            <Play size={16} className="mr-2 fill-current" />
-            Try Demo Mode
-          </Button>
+      <div className="mt-10 pt-8 border-t border-gray-50">
+        <div className="w-full bg-[#F9F6F0] rounded-3xl p-5 border border-gray-100 flex flex-col items-center text-center group cursor-pointer hover:bg-white hover:shadow-md transition-all" onClick={handleDemoLogin}>
+          <p className="text-[11px] text-gray-400 mb-3 font-black uppercase tracking-widest">Rapid Exploration</p>
+          <div className="flex items-center gap-3 text-[#161616] font-bold">
+            <div className="w-8 h-8 rounded-full bg-[#161616] flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+               <Play size={12} className="fill-current ml-0.5" />
+            </div>
+            <span>One-Click Demo Access</span>
+          </div>
         </div>
-        
-        <p className="text-center text-sm text-text-secondary mt-2">
-          Don&apos;t have an account?{' '}
-          <Link href="/register" className="font-semibold text-primary hover:text-secondary transition-colors">
-            Register here
-          </Link>
-        </p>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { AuthProvider } from "@/hooks/useAuth";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "TaskFlow | Weboin Technologies",
+  title: "Taskora | Weboin Technologies",
   description: "Effortless task management for creative teams and agencies.",
 };
 

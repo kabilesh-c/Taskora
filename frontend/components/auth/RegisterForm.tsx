@@ -62,12 +62,12 @@ export function RegisterForm() {
     <div className="w-full max-w-md mx-auto">
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
       
-      <div className="mb-8 text-center sm:text-left">
-        <h1 className="text-3xl font-bold tracking-tight text-text-primary mb-2">Create an account</h1>
-        <p className="text-text-secondary">Join TaskFlow and streamline your workflows.</p>
+      <div className="mb-10">
+        <h1 className="text-4xl font-extrabold tracking-tight text-[#161616] mb-3">Get Started</h1>
+        <p className="text-gray-500 font-medium">Join the elite circle of high-performers.</p>
       </div>
 
-      <form onSubmit={handleRegister} className="space-y-4">
+      <form onSubmit={handleRegister} className="space-y-5">
         <Input
           label="Full Name"
           name="fullName"
@@ -76,58 +76,61 @@ export function RegisterForm() {
           value={formData.fullName}
           onChange={handleChange}
           required
+          className="border-gray-200 focus-visible:ring-[#161616]/10 rounded-2xl h-[52px]"
         />
         
         <Input
           label="Email address"
           name="email"
           type="email"
-          placeholder="name@agency.com"
+          placeholder="name@company.com"
           value={formData.email}
           onChange={handleChange}
           required
+          className="border-gray-200 focus-visible:ring-[#161616]/10 rounded-2xl h-[52px]"
         />
         
-        <Input
-          label="Password"
-          name="password"
-          type="password"
-          placeholder="Min. 8 characters"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        
-        <Input
-          label="Confirm Password"
-          name="confirmPassword"
-          type="password"
-          placeholder="Repeat password"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          required
-        />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <Input
+            label="Password"
+            name="password"
+            type="password"
+            placeholder="••••••••"
+            value={formData.password}
+            onChange={handleChange}
+            required
+            className="border-gray-200 focus-visible:ring-[#161616]/10 rounded-2xl h-[52px]"
+          />
+          
+          <Input
+            label="Confirm"
+            name="confirmPassword"
+            type="password"
+            placeholder="••••••••"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            required
+            className="border-gray-200 focus-visible:ring-[#161616]/10 rounded-2xl h-[52px]"
+          />
+        </div>
         
         <div className="pt-2">
-          <label className="flex items-start space-x-2 cursor-pointer">
-            <input type="checkbox" required className="mt-1 rounded text-primary focus:ring-primary h-4 w-4 border-gray-300" />
-            <span className="text-xs text-text-secondary">
-              I agree to the <a href="#" className="font-medium text-primary hover:underline">Terms of Service</a> and <a href="#" className="font-medium text-primary hover:underline">Privacy Policy</a>.
+          <label className="flex items-start space-x-3 cursor-pointer group">
+            <input type="checkbox" required className="mt-1 rounded text-[#161616] focus:ring-[#161616] h-4 w-4 border-gray-300" />
+            <span className="text-[11px] text-gray-500 font-medium leading-tight">
+              I agree to the <a href="#" className="font-bold text-[#161616] hover:underline">Terms of Service</a> and <a href="#" className="font-bold text-[#161616] hover:underline">Privacy Policy</a>.
             </span>
           </label>
         </div>
 
-        <Button type="submit" className="w-full mt-4" isLoading={isLoading}>
-          Create Account
+        <Button 
+          type="submit" 
+          className="w-full h-[60px] bg-[#161616] hover:bg-black text-white rounded-full font-bold text-base shadow-xl transition-all hover:scale-[1.02] active:scale-95 mt-4" 
+          isLoading={isLoading}
+        >
+          Create Member Profile
         </Button>
       </form>
-
-      <p className="text-center text-sm text-text-secondary mt-8">
-        Already have an account?{' '}
-        <Link href="/login" className="font-semibold text-primary hover:text-secondary transition-colors">
-          Sign In here
-        </Link>
-      </p>
     </div>
   );
 }
