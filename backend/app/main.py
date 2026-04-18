@@ -8,11 +8,14 @@ from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+from app.api.routes.admin import router as admin_router
 from app.api.routes.auth import router as auth_router
 from app.api.routes.tasks import router as tasks_router
+from app.api.routes.voice import router as voice_router
 from app.core.config import settings
-from app.db.database import engine
+from app.db.database import engine, async_session_factory
 from app.db.models import Base
+from app.db.seed import seed_demo_data
 
 logging.basicConfig(
     level=logging.INFO,
@@ -24,17 +27,21 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """Application lifespan — create tables on startup."""
-    logger.info("Starting TaskFlow API...")
+    logger.info("Starting Taskora API...")
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
     logger.info("Database tables created/verified.")
+    
+    async with async_session_factory() as session:
+        await seed_demo_data(session)
+        
     yield
-    logger.info("Shutting down TaskFlow API...")
+    logger.info("Shutting down Taskora API...")
     await engine.dispose()
 
 
 app = FastAPI(
-    title="TaskFlow API",
+    title="Taskora API",
     description="Task management API for Weboin Technologies",
     version="1.0.0",
     lifespan=lifespan,
@@ -44,7 +51,7 @@ app = FastAPI(
 )
 
 # CORS configuration
-origins = settings.ALLOWED_ORIGINS.split(",")
+origins = [o.strip() for o in settings.ALLOWED_ORIGINS.split(",")]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -56,6 +63,8 @@ app.add_middleware(
 # Register routers under /api/v1
 app.include_router(auth_router, prefix="/api/v1")
 app.include_router(tasks_router, prefix="/api/v1")
+app.include_router(voice_router, prefix="/api/v1")
+app.include_router(admin_router, prefix="/api/v1")
 
 
 @app.exception_handler(Exception)
@@ -71,4 +80,4 @@ async def global_exception_handler(request: Request, exc: Exception) -> JSONResp
 @app.get("/api/v1/health", tags=["Health"])
 async def health_check() -> dict[str, str]:
     """Health check endpoint."""
-    return {"status": "healthy", "service": "TaskFlow API"}
+    return {"status": "healthy", "service": "Taskora API"}
