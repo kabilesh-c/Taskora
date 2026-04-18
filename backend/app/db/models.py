@@ -67,6 +67,8 @@ class User(Base):
     )
 
 
+from sqlalchemy import JSON
+
 class Task(Base):
     """Task model belonging to a user."""
 
@@ -77,6 +79,7 @@ class Task(Base):
     )
     title: Mapped[str] = mapped_column(String(500), nullable=False)
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
+    project_category: Mapped[str | None] = mapped_column(String(100), nullable=True)
     priority: Mapped[TaskPriority] = mapped_column(
         Enum(TaskPriority, name="task_priority", create_constraint=True),
         default=TaskPriority.MEDIUM,
@@ -88,6 +91,21 @@ class Task(Base):
         nullable=False,
     )
     due_date: Mapped[date | None] = mapped_column(Date, nullable=True)
+    
+    # UI and timeline specifically mapped fields
+    start_time: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    end_time: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    progress: Mapped[int] = mapped_column(default=0, nullable=False)
+    team_members: Mapped[list[str] | None] = mapped_column(JSON, nullable=True)
+    accent_color: Mapped[str | None] = mapped_column(String(50), nullable=True)
+    link: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    
+    # Optional stats for special blocks
+    stats_budget: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    stats_people: Mapped[int | None] = mapped_column(nullable=True)
+    stats_comments: Mapped[int | None] = mapped_column(nullable=True)
+    sub_tasks: Mapped[list[str] | None] = mapped_column(JSON, nullable=True)
+
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         default=lambda: datetime.now(timezone.utc),
