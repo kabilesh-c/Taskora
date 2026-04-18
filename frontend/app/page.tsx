@@ -7,10 +7,18 @@ import { Features } from '@/components/landing/Features';
 import { UpcomingPlans } from '@/components/landing/UpcomingPlans';
 import { Testimonials } from '@/components/landing/Testimonials';
 import { Footer } from '@/components/landing/Footer';
+import TargetCursor from '@/components/ui/TargetCursor';
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-bordup-bg font-sans selection:bg-purple-200 selection:text-purple-900 overflow-x-hidden">
+    <div className="min-h-screen bg-bordup-bg font-sans selection:bg-purple-200 selection:text-purple-900 overflow-x-hidden relative">
+      <TargetCursor 
+        targetSelector=".cursor-target" 
+        spinDuration={2} 
+        hideDefaultCursor={true} 
+        hoverDuration={0.2} 
+        parallaxOn={true} 
+      />
       <Navbar />
       
       <main>

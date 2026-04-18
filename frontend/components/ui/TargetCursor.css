@@ -1,0 +1,67 @@
+.target-cursor-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 9999;
+  /* Instead of mix-blend-mode: difference which causes issues on some colored rects, we'll use a dynamic black/gray aesthetic */
+  transform: translate(-50%, -50%);
+}
+
+.target-cursor-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  background: #111;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.target-cursor-corner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border: 2.5px solid #111;
+  will-change: transform;
+}
+
+/* For dark mode / dark panels, we need the cursor corners to invert or be bright */
+.dark-panel .cursor-target:hover ~ * .target-cursor-corner,
+.dark-panel:hover .target-cursor-corner {
+  border-color: #fff !important;
+}
+.dark-panel:hover .target-cursor-dot {
+  background: #fff !important;
+}
+
+.corner-tl {
+  transform: translate(-150%, -150%);
+  border-right: none;
+  border-bottom: none;
+}
+
+.corner-tr {
+  transform: translate(50%, -150%);
+  border-left: none;
+  border-bottom: none;
+}
+
+.corner-br {
+  transform: translate(50%, 50%);
+  border-left: none;
+  border-top: none;
+}
+
+.corner-bl {
+  transform: translate(-150%, 50%);
+  border-right: none;
+  border-top: none;
+}
