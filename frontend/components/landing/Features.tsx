@@ -1,99 +1,113 @@
-'use client';
-
-import { motion } from 'framer-motion';
-import { Mic, CalendarDays, Flag, Users, CheckCircle2, TrendingUp } from 'lucide-react';
-import { Card } from '@/components/ui/Card';
-
 export function Features() {
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-  };
-
-  const features = [
-    {
-      title: "Voice Task Creation",
-      description: "Speak your task, AI extracts title, priority and deadline automatically using Gemini.",
-      icon: <Mic className="w-6 h-6 text-primary" />,
-      color: "bg-purple-50"
-    },
-    {
-      title: "Calendar View",
-      description: "Visualise deadlines across campaigns and projects in a weekly/monthly grid.",
-      icon: <CalendarDays className="w-6 h-6 text-blue-500" />,
-      color: "bg-blue-50"
-    },
-    {
-      title: "Priority Tracking",
-      description: "Urgent, High, Medium, Low — colour-coded across every view.",
-      icon: <Flag className="w-6 h-6 text-amber-500" />,
-      color: "bg-amber-50"
-    },
-    {
-      title: "Team Task Ownership",
-      description: "Assign tasks per project with clear ownership trails.",
-      icon: <Users className="w-6 h-6 text-emerald-500" />,
-      color: "bg-emerald-50"
-    },
-    {
-      title: "One-Click Completion",
-      description: "Mark tasks done instantly with satisfying completion animations.",
-      icon: <CheckCircle2 className="w-6 h-6 text-rose-500" />,
-      color: "bg-rose-50"
-    },
-    {
-      title: "Real-time Stats",
-      description: "Track completion rates, backlogs and progress at a glance.",
-      icon: <TrendingUp className="w-6 h-6 text-cyan-500" />,
-      color: "bg-cyan-50"
-    }
-  ];
-
   return (
-    <section id="features" className="py-24 bg-background-alt relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white/40 to-transparent"></div>
-      
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div className="max-w-2xl">
-            <h2 className="text-3xl md:text-4xl font-bold text-text-primary tracking-tight mb-4">
-              Streamline your<br/>task Management process
-            </h2>
-            <p className="text-text-secondary text-lg">
-              Everything you need to run your agency&apos;s operations without the bloated features you don&apos;t.
+    <section className="bg-white rounded-[48px] mx-4 lg:mx-8 px-6 lg:px-12 py-20 mb-24 shadow-sm border border-gray-100">
+      <div className="max-w-[1200px] mx-auto">
+        
+        {/* Header Row */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+          <h2 className="text-[32px] md:text-[40px] font-bold text-bordup-dark leading-tight max-w-[400px]">
+             Streamline your<br/>task Management process
+          </h2>
+          <button className="h-[44px] pl-6 pr-1.5 bg-bordup-dark text-white rounded-full text-sm font-semibold flex items-center justify-center hover:bg-black transition-colors group">
+            2nd Series
+            <div className="ml-3 w-8 h-8 bg-white rounded-full flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                 <path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="#161616" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+          </button>
+        </div>
+
+        {/* Dashboard Mockups Row */}
+        <div className="flex flex-col md:flex-row gap-6 mb-16">
+          
+          {/* Left Mockup */}
+          <div className="flex-1 bg-bordup-purple/10 rounded-[24px] p-2 border border-purple-100/50">
+             <div className="bg-white w-full rounded-[20px] h-[300px] shadow-sm border border-gray-100 p-4 flex flex-col relative overflow-hidden">
+                <div className="flex justify-between items-center mb-4">
+                   <div className="flex items-center gap-2">
+                     <div className="w-5 h-5 bg-bordup-dark rounded-md"></div>
+                     <div className="w-20 h-2 bg-gray-200 rounded"></div>
+                   </div>
+                   <div className="flex items-center gap-2">
+                     <div className="w-16 h-2 bg-gray-200 rounded"></div>
+                     <div className="w-6 h-6 rounded-full bg-indigo-100"></div>
+                   </div>
+                </div>
+                
+                <div className="mt-4 flex gap-4 h-full">
+                  <div className="w-48 bg-gray-50 rounded-xl p-3">
+                     <div className="w-full h-1 bg-red-400 mb-4 rounded-full"></div>
+                     <div className="w-full h-12 bg-white rounded-lg shadow-sm border border-gray-100 mb-2"></div>
+                     <div className="w-full h-24 bg-white rounded-lg shadow-sm border border-gray-100 mb-2 relative overflow-hidden">
+                       <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-orange-500 opacity-20"></div>
+                       <div className="absolute bottom-2 right-2 w-4 h-4 bg-orange-500 rounded-full"></div>
+                     </div>
+                  </div>
+                  <div className="w-48 bg-gray-50 rounded-xl p-3">
+                     <div className="w-full h-1 bg-blue-400 mb-4 rounded-full"></div>
+                     <div className="w-full h-16 bg-white rounded-lg shadow-sm border border-gray-100 mb-2"></div>
+                     <div className="w-full h-12 bg-gray-800 rounded-lg shadow-sm mb-2"></div>
+                  </div>
+                </div>
+             </div>
+          </div>
+
+          {/* Right Mockup */}
+          <div className="flex-1 bg-[#F5F8FF] rounded-[24px] p-2 border border-blue-50">
+             <div className="bg-white w-full rounded-[20px] h-[300px] shadow-sm border border-gray-100 p-4 flex flex-col">
+                <div className="flex justify-between items-center pb-3 border-b border-gray-100 mb-4">
+                  <div className="flex gap-4">
+                    <span className="text-xs font-bold text-bordup-dark">List tasks</span>
+                    <span className="text-xs font-medium text-gray-400">Board</span>
+                    <span className="text-xs font-medium text-gray-400">Calendar</span>
+                  </div>
+                  <div className="w-24 h-6 bg-purple-100 rounded-full"></div>
+                </div>
+
+                <div className="space-y-3">
+                  {[1,2,3,4].map(idx => (
+                    <div key={idx} className="flex items-center justify-between py-2 border-b border-gray-50">
+                       <div className="flex items-center gap-3 w-1/3">
+                         <div className={`w-2 h-2 rounded-full ${idx===1?'bg-orange-400':idx===2?'bg-emerald-400':'bg-purple-400'}`}></div>
+                         <div className="w-32 h-2 bg-gray-200 rounded"></div>
+                       </div>
+                       <div className="w-16 h-2 bg-gray-100 rounded"></div>
+                       <div className="w-16 h-4 bg-gray-100 rounded-full"></div>
+                       <div className="flex -space-x-1">
+                         <div className="w-5 h-5 rounded-full bg-gray-200 border border-white"></div>
+                         <div className="w-5 h-5 rounded-full bg-gray-300 border border-white"></div>
+                       </div>
+                    </div>
+                  ))}
+                </div>
+             </div>
+          </div>
+
+        </div>
+
+        {/* Text Columns Row */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div>
+            <h3 className="text-lg font-bold text-bordup-dark mb-3">Solving Confusion Managing Task</h3>
+            <p className="text-[13px] text-gray-500 leading-relaxed max-w-[280px]">
+              Find our where we simplified schedule and project resolutions through automated tools.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-bordup-dark mb-3">Facilitating Team Collaboration</h3>
+            <p className="text-[13px] text-gray-500 leading-relaxed max-w-[280px]">
+              Platform that builds collaborative numbers creating an environment where communication connects.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-bordup-dark mb-3">Maintaining Focus on Important Tasks</h3>
+            <p className="text-[13px] text-gray-500 leading-relaxed max-w-[280px]">
+              Platforming focus on important tasks to ensure you achieve true management.
             </p>
           </div>
         </div>
 
-        <motion.div 
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {features.map((feature, i) => (
-            <motion.div key={i} variants={item}>
-              <Card glass className="h-full p-8 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border-t-2 border-t-transparent hover:border-t-primary cursor-default group">
-                <div className={`w-12 h-12 rounded-xl ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-semibold text-text-primary mb-3">{feature.title}</h3>
-                <p className="text-text-secondary leading-relaxed">{feature.description}</p>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );

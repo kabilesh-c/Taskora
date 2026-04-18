@@ -1,26 +1,26 @@
 import { Navbar } from '@/components/landing/Navbar';
 import { Hero } from '@/components/landing/Hero';
+import { DarkFeatureBlock } from '@/components/landing/DarkFeatureBlock';
 import { StatsBar } from '@/components/landing/StatsBar';
+import { FeatureCardsGrid } from '@/components/landing/FeatureCardsGrid';
 import { Features } from '@/components/landing/Features';
-import { ProductPreview } from '@/components/landing/ProductPreview';
-import { OnboardingPreview } from '@/components/landing/OnboardingPreview';
+import { UpcomingPlans } from '@/components/landing/UpcomingPlans';
 import { Testimonials } from '@/components/landing/Testimonials';
-import { CTASection } from '@/components/landing/CTASection';
 import { Footer } from '@/components/landing/Footer';
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-background font-sans selection:bg-primary/30 selection:text-primary-900">
+    <div className="min-h-screen bg-bordup-bg font-sans selection:bg-purple-200 selection:text-purple-900 overflow-x-hidden">
       <Navbar />
       
       <main>
         <Hero />
+        <DarkFeatureBlock />
         <StatsBar />
+        <FeatureCardsGrid />
         <Features />
-        <ProductPreview />
-        <OnboardingPreview />
+        <UpcomingPlans />
         <Testimonials />
-        <CTASection />
       </main>
 
       <Footer />

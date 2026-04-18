@@ -3,29 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  --foreground-rgb: 22, 22, 22;
+  --background-start-rgb: 249, 246, 240;
+  --background-end-rgb: 249, 246, 240;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: #FAFAFA;
+  background: #F9F6F0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
-  }
-  .glass-card {
-    @apply bg-white/60 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.06)] border border-white/40;
   }
 }

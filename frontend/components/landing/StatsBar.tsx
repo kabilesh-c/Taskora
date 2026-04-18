@@ -1,87 +1,61 @@
-'use client';
-
-import { useEffect, useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
-
-function AnimatedCounter({ end, suffix = '', duration = 2 }: { end: number, suffix?: string, duration?: number }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-
-  useEffect(() => {
-    if (!isInView) return;
-
-    let startTime: number | null = null;
-    let animationFrameId: number;
-
-    const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = timestamp - startTime;
-      
-      const percentage = Math.min(progress / (duration * 1000), 1);
-      // easeOutExpo function
-      const easeProgress = percentage === 1 ? 1 : 1 - Math.pow(2, -10 * percentage);
-      
-      setCount(Math.floor(end * easeProgress));
-
-      if (percentage < 1) {
-        animationFrameId = requestAnimationFrame(animate);
-      }
-    };
-
-    animationFrameId = requestAnimationFrame(animate);
-
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [end, duration, isInView]);
-
-  // Format large numbers (e.g. 4200 -> 4,200)
-  const formattedCount = count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-  return (
-    <span ref={ref} className="text-4xl md:text-5xl font-bold text-text-primary tracking-tight">
-      {formattedCount}{suffix}
-    </span>
-  );
-}
-
 export function StatsBar() {
-  const stats = [
-    { value: 4200, label: "Customer are using our application", suffix: "+" },
-    { value: 120, label: "Agencies worldwide", suffix: "K+" },
-    { value: 4.8, label: "Average rating by users", suffix: "" },
-    { value: 100, label: "Client satisfaction rate", suffix: "%" },
-  ];
-
   return (
-    <section className="py-12 bg-white border-y border-gray-100">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-x-0 lg:divide-x divide-gray-100">
-          {stats.map((stat, i) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className={`flex flex-col ${i % 2 !== 0 ? 'lg:pl-8' : i > 0 ? 'lg:pl-8' : ''}`}
-            >
-              <div className="flex items-center gap-2 mb-2">
-                {stat.value === 4.8 ? (
-                  <span className="text-amber-400 text-3xl">★</span>
-                ) : stat.value === 120 ? (
-                  <div className="flex -space-x-1 mr-2">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=A" className="w-8 h-8 rounded-full border border-white bg-blue-100" />
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=B" className="w-8 h-8 rounded-full border border-white bg-green-100" />
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=C" className="w-8 h-8 rounded-full border border-white bg-pink-100" />
-                  </div>
-                ) : null}
-                <AnimatedCounter end={stat.value} suffix={stat.suffix} />
-              </div>
-              <p className="text-sm text-text-secondary leading-snug pr-4">{stat.label}</p>
-            </motion.div>
-          ))}
+    <section className="px-6 lg:px-8 max-w-[1280px] mx-auto mb-16">
+      
+      {/* Top Stats Row */}
+      <div className="grid grid-cols-1 md:grid-cols-3 divide-y-0 md:divide-x divide-gray-200 border-b border-gray-200 pb-12 mb-12 border-t pt-12">
+        
+        <div className="flex flex-col gap-3 md:pr-12 pb-8 md:pb-0">
+          <div className="flex items-center gap-3">
+             <div className="flex -space-x-2">
+                 <div className="w-8 h-8 rounded-full border-2 border-bordup-bg bg-indigo-100 overflow-hidden"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=A" /></div>
+                 <div className="w-8 h-8 rounded-full border-2 border-bordup-bg bg-pink-100 overflow-hidden"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=B" /></div>
+                 <div className="w-8 h-8 rounded-full border-2 border-bordup-bg bg-emerald-100 overflow-hidden"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=C" /></div>
+             </div>
+             <span className="text-2xl font-bold text-bordup-dark">120K+</span>
+          </div>
+          <p className="text-xs text-gray-500 leading-relaxed font-medium mt-2">
+            It is questions true on sure account, phrases and discover the bordup.
+          </p>
         </div>
+
+        <div className="flex flex-col gap-2 md:px-12 py-8 md:py-0">
+          <div className="flex items-center gap-2">
+             <span className="text-bordup-yellow text-xl">★</span>
+             <span className="text-2xl font-bold text-bordup-dark">4.8</span>
+          </div>
+          <p className="text-xs text-gray-500 leading-relaxed font-medium mt-3">
+            Positive ratings for rules and around the world. Check the review here.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-2 md:pl-12 pt-8 md:pt-0">
+          <div className="flex items-center gap-2">
+             <span className="text-2xl font-bold text-bordup-dark">100%</span>
+          </div>
+          <p className="text-xs text-gray-500 leading-relaxed font-medium mt-3">
+            Live satisfaction with Bordup, refunding if you not prefer product.
+          </p>
+        </div>
+
       </div>
+
+      {/* Customer Count Row */}
+      <div className="flex flex-col items-start gap-6">
+        <h2 className="text-[32px] md:text-[40px] font-bold text-bordup-dark leading-tight max-w-[400px]">
+          4,567 Customer are using our application
+        </h2>
+        
+        <button className="h-[44px] pl-6 pr-1.5 bg-bordup-dark text-white rounded-full text-sm font-semibold flex items-center justify-center hover:bg-black transition-colors group">
+          Get Started
+          <div className="ml-3 w-8 h-8 bg-white rounded-full flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+               <path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="#161616" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+        </button>
+      </div>
+
     </section>
   );
 }

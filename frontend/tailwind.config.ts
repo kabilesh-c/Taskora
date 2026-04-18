@@ -12,16 +12,18 @@ const config: Config = {
         primary: "#7C3AED",
         secondary: "#4F46E5",
         accent: "#06B6D4",
-        background: "#FAFAFA",
-        "background-alt": "#F3F0FF",
-        "text-primary": "#0F0A1E",
-        "text-secondary": "#6B7280",
-        success: "#10B981",
-        "dark-bg": "#0F0A1E",
-        "dark-panel": "#1E1A31",
+        "bordup-bg": "#F9F6F0", // cream background
+        "bordup-dark": "#161616", // almost black elements
+        "bordup-orange": "#FF8F6B",
+        "bordup-purple": "#D9C6F4",
+        "bordup-yellow": "#FBCB46"
       },
       fontFamily: {
         sans: ["var(--font-inter)"],
+      },
+      boxShadow: {
+        'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
+        'strong': '0 20px 50px -10px rgba(0,0,0,0.2)'
       },
       animation: {
         "float-slow": "float 3s ease-in-out infinite",
