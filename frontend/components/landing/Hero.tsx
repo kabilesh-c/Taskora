@@ -8,16 +8,8 @@ export function Hero() {
   const containerRef = useRef(null);
 
   return (
-    <section id="home" className="relative pt-40 pb-20 overflow-hidden">
-      {/* Moving gradient background using framer motion */}
-      <motion.div 
-        animate={{ 
-          rotate: [0, 360],
-          scale: [1, 1.2, 1],
-        }}
-        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-fuchsia-200/60 via-purple-100/30 to-transparent -z-10 blur-3xl pointer-events-none opacity-80"
-      ></motion.div>
+    <section id="home" className="relative pt-40 pb-20">
+      {/* Dynamic background is now handled by Waves component in parent */}
 
       <div className="max-w-[1000px] mx-auto px-6 text-center relative z-10 flex flex-col items-center">
         

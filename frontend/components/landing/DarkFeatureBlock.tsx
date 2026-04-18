@@ -1,39 +1,56 @@
+'use client';
+
+import { useRef } from 'react';
 import Image from 'next/image';
+import VariableProximity from '@/components/ui/VariableProximity';
 
 export function DarkFeatureBlock() {
-  return (
-    <section className="px-6 lg:px-8 mb-16 max-w-[1280px] mx-auto">
-      <div className="w-full bg-bordup-dark rounded-[32px] p-8 md:p-12 lg:p-16 flex flex-col md:flex-row items-center justify-between gap-12 relative overflow-hidden group">
-        
-        {/* Background diagonal dark stripes matching reference image */}
-        <div className="absolute right-0 bottom-0 w-1/3 h-full opacity-20 pointer-events-none transition-opacity group-hover:opacity-40 duration-700">
-           <div className="w-48 h-full bg-gray-600 rotate-45 transform origin-bottom-right scale-150 rounded-full blur-xl absolute -right-10 bottom-0"></div>
-           <div className="w-32 h-full bg-gray-600 rotate-45 transform origin-bottom-right scale-150 rounded-full blur-xl absolute -right-40 bottom-10"></div>
-        </div>
+  const containerRef = useRef(null);
 
-        {/* Left Side: High Fidelity Generated Image */}
-        <div className="w-full md:w-[55%] relative h-[300px] md:h-[400px] flex items-center justify-center rounded-2xl overflow-hidden shadow-2xl border border-white/10 group-hover:scale-[1.01] transition-transform duration-500">
-           <Image 
-             src="/dark-analytics.png" 
-             alt="Dark Analytics Dashboard" 
-             fill
-             className="object-cover"
-           />
+  return (
+    <section className="px-6 lg:px-8 mb-24 max-w-[1280px] mx-auto">
+      <div className="w-full bg-[#161616]/90 backdrop-blur-xl rounded-[48px] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-16 relative overflow-hidden group border border-white/10 cursor-target">
+        
+        {/* Subtle Background Gradient */}
+        <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none group-hover:bg-purple-600/15 transition-colors duration-1000"></div>
+
+        {/* Left Side: Performance Dashboard Mockup */}
+        <div className="w-full md:w-[50%] relative group/mockup">
+           <div className="relative z-10 bg-[#1e1e1e] rounded-[32px] p-2 shadow-2xl border border-white/10 overflow-hidden transform group-hover:scale-[1.02] transition-transform duration-700">
+             <Image 
+               src="/dark-analytics.png" 
+               alt="Performance Analytics" 
+               width={800}
+               height={500}
+               className="w-full h-auto rounded-[24px]"
+               sizes="(max-width: 768px) 100vw, 800px"
+             />
+           </div>
+           {/* Floating decoration cards if we had them, otherwise just clean mockup */}
+           <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-white/5 rounded-full blur-3xl group-hover:bg-white/10 transition-colors"></div>
         </div>
 
         {/* Right Text Content Side */}
-        <div className="w-full md:w-[45%] relative z-10 lg:pl-10">
-          <h2 className="text-3xl md:text-[40px] font-bold text-white leading-tight mb-5 tracking-tight group-hover:text-fuchsia-100 transition-colors">
-            Track real-time progress with Reports
+        <div className="w-full md:w-[45%] relative z-10">
+          <h2 ref={containerRef} className="text-4xl md:text-[48px] font-bold text-white leading-[1.1] mb-6 tracking-tight">
+            <VariableProximity
+              label="Track real-time progress with Reports"
+              className="text-white cursor-target"
+              fromFontVariationSettings="'wght' 400, 'opsz' 14"
+              toFontVariationSettings="'wght' 900, 'opsz' 84"
+              containerRef={containerRef}
+              radius={100}
+              falloff="linear"
+            />
           </h2>
-          <p className="text-gray-400 text-base mb-8 max-w-[400px]">
-            Get valuable insights into your productivity and project status with our real-time reporting features.
+          <p className="text-gray-400 text-lg mb-10 max-w-[440px] leading-relaxed">
+            Gain valuable insights into your productivity and project status with our high-fidelity real-time reporting suite.
           </p>
-          <button className="h-[44px] pl-6 pr-1.5 bg-white text-bordup-dark rounded-full text-sm font-bold inline-flex items-center justify-center hover:bg-gray-100 transition-transform cursor-target hover:scale-[1.02] active:scale-95 group/btn">
+          <button className="h-[56px] pl-8 pr-2 bg-white text-[#161616] rounded-full text-base font-bold inline-flex items-center justify-center hover:bg-gray-100 transition-all cursor-target hover:scale-[1.05] active:scale-95 group/btn">
             Get Started
-            <div className="ml-3 w-8 h-8 bg-bordup-dark rounded-full flex items-center justify-center group-hover/btn:translate-x-0.5 transition-transform">
-              <svg width="10" height="10" viewBox="0 0 12 12" fill="none" className="rotate-0 text-white">
-                 <path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <div className="ml-4 w-10 h-10 bg-[#161616] rounded-full flex items-center justify-center group-hover/btn:translate-x-1 transition-transform">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                 <path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
           </button>

@@ -12,7 +12,7 @@ export function Navbar() {
           <div className="w-8 h-8 rounded-full bg-bordup-dark flex items-center justify-center">
             <div className="w-3 h-3 rounded-full border-[2px] border-white relative top-[-1px]"></div>
           </div>
-          <span className="font-bold text-xl tracking-tight text-bordup-dark">TaskFlow</span>
+          <span className="font-bold text-xl tracking-tight text-bordup-dark">Taskora</span>
         </div>
 
         {/* Desktop Links */}
