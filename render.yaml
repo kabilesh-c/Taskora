@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: taskora-backend
+    env: docker
+    dockerfilePath: backend/Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALGORITHM
+        value: HS256
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: ADMIN_SECRET
+        generateValue: true
+    autoDeploy: false
